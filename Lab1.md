@@ -122,9 +122,9 @@ The main tasks for this exercise are as follows:
 1. On **LON-DC1**, in **Server Manager**, add Nano-SVR1 to the **Computer** list.
 2. In Server Manager, expand **File and Storage Services**, click **Shares**, and then in the **TASKS** list, click **New Share**.
 3. Create a new shared folder:
-    a. Type: **SMB Share - Quick**
-    b. Server: **nano-svr1**
-    c. Share name: **Data**
+    1. Type: **SMB Share - Quick**
+    2. Server: **nano-svr1**
+    3. Share name: **Data**
     
 **Task 2: Test the file server and web server on Nano Server**
 1. If necessary, on **LON-DC1**, map drive **Z** to **\\\\Nano-svr1\c$**.
@@ -134,16 +134,16 @@ The main tasks for this exercise are as follows:
 ```
 3. Save the file called **Default.htm** to **z:\Inetpub\wwwroot**.  
 4. Open **Windows Internet Explorer**, and then navigate to **http://nano-svr1**. Does your web page display?
-5. Map drive **Y** to **\\Nano-svr1\data**. 
+5. Map drive **Y** to **\\\\Nano-svr1\data**. 
 6. Open **WordPad**, create a file, and then save the file to the root of drive **Y**.
 7. Use File Explorer to verify that your file is saved on **Nano-Svr1**.
 
 **Task 3: Prepare for the next module**
 
 After you finish the lab, revert the virtual machines to their initial state by completing the following steps: 
-1. On the host computer, switch to the Hyper-V Manager console.
-2. In the Virtual Machines list, right-click 20740B-LON-DC1, and then click Revert.
-3. In the Revert Virtual Machine dialog box, click Revert.
-4. Repeat steps 2 and 3 for 20740B-NANO-SVR1. 
+1. On the host computer, switch to the **Hyper-V Manager** console.
+2. In the **Virtual Machines** list, right-click **20740B-LON-DC1**, and then click **Revert**.
+3. In the **Revert Virtual Machine** dialog box, click **Revert**.
+4. Repeat steps 2 and 3 for **20740B-NANO-SVR1**. 
  
 >**Results:** After completing this exercise, you will have installed and enabled the file and web server roles using remote management. 
