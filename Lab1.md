@@ -82,7 +82,7 @@ The main tasks for this exercise are as follows:
 3. In the **Windows PowerShell** credential request dialog box, in the **Password** box, type **Pa55w.rd**, and then click **OK**.
 4. To enable file sharing through the firewall, run **netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=yes**.
 5. Close the Windows PowerShell remoting session by running **Exit-PSSession**.
-6. Map a network drive to the **C** drive on Nano Server. (net use z: \\172.16.0.X\c$)
+6. Map a network drive to the **C** drive on Nano Server. (net use z: \\\\172.16.0.X\c$)
 7. Switch to the **Z** drive and then copy **C:odjblob** to the root of the **C** drive on Nano Server.
 8. Reestablish a Windows PowerShell remoting session to Nano Server.
 9. Run **djoin /requestodj /loadfile c:\odjblob /windowspath c:\windows /localos** to complete the process of adding the computer to the domain.
@@ -97,8 +97,8 @@ The main tasks for this exercise are as follows:
 4. To add the File Server role to Nano Server, run **install-windowsfeature Fs-fileserver –comp Nanosvr1**
 5. To verify the role is installed, run **get-windowsfeature –comp Nano-svr1**.  
 6. Enable a Windows PowerShell remoting session with Nano Server. Remember to change **X** to the last octet of the IP address of your Nano server:
-   a. Run **$ip = "172.16.0.X"**.
-   b. Run **Enter-PSSession -ComputerName $ip -Credential $ip\Administrator**.
+   1. Run **$ip = "172.16.0.X"**.
+   2. Run **Enter-PSSession -ComputerName $ip -Credential $ip\Administrator**.
 7. When you receive a prompt, type **Pa55w.rd** as the password.
 8. To view the IP configuration of Nano Server, run **get-netipaddress**.
 9. To view the startup environment of Nano Server, run **bcdedit /enum**.
@@ -129,7 +129,9 @@ The main tasks for this exercise are as follows:
 **Task 2: Test the file server and web server on Nano Server**
 1. If necessary, on **LON-DC1**, map drive **Z** to **\\\\Nano-svr1\c$**.
 2. Start **Notepad**, and then create a file with the following line.
-><H1> Nano Server Website </H1>
+```
+<H1> Nano Server Website </H1>
+```
 3. Save the file called **Default.htm** to **z:\Inetpub\wwwroot**.  
 4. Open **Windows Internet Explorer**, and then navigate to **http://nano-svr1**. Does your web page display?
 5. Map drive **Y** to **\\Nano-svr1\data**. 
