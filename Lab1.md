@@ -9,10 +9,10 @@ After completing this lab, you will be able to:
 * Configure Nano Server. 
 
 **Lab Setup** 
-*Estimated Time:* 60 minutes
-*Virtual machines:* **20740B-LON-DC1**, **20740B-NANO-SVR1**
-*User name:* **Adatum\Administrator**
-*Password:* **Pa55w.rd**
+- *Estimated Time:* 60 minutes
+- *Virtual machines:* **20740B-LON-DC1**, **20740B-NANO-SVR1**
+- *User name:* **Adatum\Administrator**
+- *Password:* **Pa55w.rd**
 
 For this lab, you will use the available virtual machine environment. Before you begin the lab, complete the following steps:
 1. On the host computer, start **Hyper-V Manager**.
@@ -76,9 +76,9 @@ The main tasks for this exercise are as follows:
 > **Note:** Replace the IP address **172.16.0.X** in the following commands with the IP address you recorded earlier from your Nano Server installation. 
 
 2. The following commands are used to enable Windows PowerShell remoting:
-    a. **Set-Item WSMan:\localhost\Client\TrustedHosts "172.16.0.X"**
-    b. **$ip = "172.16.0.X"**
-    c. **Enter-PSSession -ComputerName \$ip -Credential \$ip\\Administrator**
+    1. **Set-Item WSMan:\localhost\Client\TrustedHosts "172.16.0.X"**
+    2. **$ip = "172.16.0.X"**
+    3. **Enter-PSSession -ComputerName \$ip -Credential \$ip\\Administrator**
 3. In the **Windows PowerShell** credential request dialog box, in the **Password** box, type **Pa55w.rd**, and then click **OK**.
 4. To enable file sharing through the firewall, run **netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=yes**.
 5. Close the Windows PowerShell remoting session by running **Exit-PSSession**.
