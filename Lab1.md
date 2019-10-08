@@ -1,149 +1,117 @@
-# Lab: Installing and configuring Nano Server 
+# Lab: Installing and configuring Server Core
 
-**Scenario** 
-You are responsible for implementing many of the new features in Windows Server 2016. To become familiar with the new operating system, you decide to install a new server running Windows Server 2016 and complete the post-installation configuration tasks. 
+**Scenario**
+Your team in the IT department at Adatum Corporation just purchased a new server that has no operating system. The team decides to install Windows Server 2016 Datacenter Evaluation in Server Core mode to test Server Core functionality. Your task is to perform the installation and configuration of this server. You will name it **LON-SVR6**, give it a static IP address of 172.16.0.26, and join it to the Adatum.com domain with all other default settings.
 
-**Objectives** 
+**Objectives**
 After completing this lab, you will be able to:
-* Install the Nano Server option for Windows Server 2016.
-* Configure Nano Server. 
+* Install the Server Core option for Windows Server 2016.
+* Configure Server Core. 
 
-**Lab Setup** 
-- *Estimated Time:* 60 minutes
-- *Virtual machines:* **20740B-LON-DC1**, **20740B-NANO-SVR1**
-- *User name:* **Adatum\Administrator**
-- *Password:* **Pa55w.rd**
-
-For this lab, you will use the available virtual machine environment. Before you begin the lab, complete the following steps:
+**Lab Setup**
+- Estimated Time: 60 minutes
+- Virtual machines: **20740C-LON-DC1** and **20740C-LON-SVR6**
+- User name: **Adatum\Administrator**
+- Password: **Pa55w.rd**
+- 
+- For this lab, you will use the available virtual machine environment. Before you begin the lab, complete the following steps:
 1. On the host computer, start **Hyper-V Manager**.
-2. In **Hyper-V Manager**, click **20740B-LON-DC1**, and then, in the **Actions** pane, click **Start**.
+2. In Hyper-V Manager, click **20740C-LON-DC1**, and then in the **Actions** pane, click **Start**.
 3. In the **Actions** pane, click **Connect**. Wait until the virtual machine starts.
 4. Sign in by using the following credentials:
-   * User name: **Adatum\Administrator**
-   * Password: **Pa55w.rd**
-5. Repeat steps 2 and 3 for **20740B-NANO-SVR1**.
-6. On **20740B-LON-DC1**, in the virtual machine connection window, click **Media**, point to **DVD Drive**, and then click **Insert Disk**.
-7. Browse to **D:\Program Files\Microsoft Learning\20740\Drives** and then select **WinServer2016_1607.iso**. (or C:\\)
-8. Click **Open**. 
+   1. User name: **Adatum\Administrator**
+   2. Password: **Pa55w.rd**
+5. In Hyper-V Manager, right-click **20740C-LON-SVR6**, and then select **Connect**. In the virtual machine connection window, click **Media**, point to **DVD Drive**, and then click **Insert Disk**.
+6. Browse to **D:\Program Files\Microsoft Learning\20740\Drives**, select **WinServer2016_1607.iso**, and then click Open. 
 
-## Exercise 1: Installing Nano Server 
 
-**Scenario** 
-You determine that Nano Server offers you the best installation option and decide to deploy a web server that uses Nano Server.
+## Exercise 1: Installing Server Core
 
-The main tasks for this exercise are as follows:
-1. Copy the required Windows PowerShell scripts.
-2. Import Windows PowerShell modules.  
-3. Create a virtual hard drive.
-4. Sign in to the NANO-SVR1 virtual machine.
+**Scenario**
+You determine that Server Core offers you the best installation option and decide to evaluate a server that uses Server Core. The main task for this exercise is as follows: 1.Install Windows Server 2016 Datacenter Evaluation on LON-SVR6. 
 
-**Task 1: Copy the required Windows PowerShell scripts** 
-1. On **LON-DC1**, open an elevated **Windows PowerShell** prompt.
-2. Change to the root directory of drive **C**, and then make a folder called **Nano**.
-3. Copy all the files with a .ps* extension from the **D:\NanoServer\NanoServerImageGenerator\\** folder to **C:\Nano**. 
+**Task 1: Install Windows Server 2016 Datacenter Evaluation on LON-SVR6**
+1. In the **20740C-LON-SVR6 Virtual Machine Connection** window, click the **Start** icon.
+2. When **LON-SVR6** starts Windows Setup, install **Windows Server 2016 Core** by using the **Windows Server 2016 Datacenter Evaluation** option.
+3. Use the Custom option rather than the Update option, accepting all other default values and license agreements.
+4. Use Pa55w.rd for the Administrator’s password.
+5. Verify that when the installation is complete, the Command Prompt window on LON-SVR6 opens with a C:\Users\Administrator> prompt. 
 
-**Task 2: Import Windows PowerShell modules**
-* Run **Import-Module c:\nano\NanoServerImageGenerator.psm1**. This command imports the required Windows PowerShell module for Nano Server. 
+>**Results:** After completing this exercise, you will have successfully installed the Windows Server 2016 Core operating system on LON-SVR6. 
 
-**Task 3: Create a virtual hard drive**
-1. Run **new-NanoServerImage -Edition Standard -mediapath D:\ -Basepath c:\nano -targetpath c:\nano\nano-svr1.vhdx -DeploymentType Guest -computername NANO-SVR1 -storage  -package Microsoft-NanoServer-IIS-Package**, and when you receive a prompt, type the password **Pa55w.rd**. 
-2. Verify that **C:\Nano** contains a file called **nano-svr1.vhdx**.
- 
-> **Note:** Normally, you would now create a virtual machine to use the **nano-svr1.vhdx** file. However, to expedite the process, you will start a virtual machine that has already been created.
+## Exercise 2: Completing post-installation tasks on Windows Server 2016 Core
 
-**Task 4: Sign in to the NANO-SVR1 virtual machine**
-* On NANO-SVR1, sign in by using the following credentials:
-  * User name: Administrator
-  * Password: **Pa55w.rd** 
- 
-**Results:** After completing this exercise, you will have successfully created the required virtual hard drive for Nano Server. 
+**Scenario**
+You must now complete the installation of Server Core by configuring the post-installation settings and joining it to the Adatum.com domain. You will also install the DNS Server role. The main task for this exercise is as follows:
 
-## Exercise 2: Completing post-installation tasks on Nano Server
-Scenario You must now complete the installation of Nano Server by configuring the post-installation settings and joining it to the Adatum.com domain.
+1. Use Windows PowerShell and Sconfig.cmd to configure the settings of Server Core.
 
-The main tasks for this exercise are as follows:
-1. Use the Nano Server Recovery Console to view basic settings.
-2. Add Nano Server to the domain. 
-3. Use Windows PowerShell to configure the settings of Nano Server. 
-
-**Task 1: Use the Nano Server Recovery Console to view basic settings** 
-1. On **NANO-SVR1**, observe that the computer name is **NANO-SVR1** and that the computer is in a workgroup.
-2. In **Network Adapter Settings**, notice that DHCP is providing the IP configuration. Make a note of the IP address: _____________ 
-
-**Task 2: Add Nano Server to the domain**
-1. On **LON-DC1**, in the **Administrator: Windows PowerShell** window, run **djoin.exe /provision /domain adatum /machine nano-svr1 /savefile .\odjblob.txt**. This creates a file that you will use to complete the process of adding Nano Server to the domain.
-
-> **Note:** Replace the IP address **172.16.0.X** in the following commands with the IP address you recorded earlier from your Nano Server installation. 
-
-2. The following commands are used to enable Windows PowerShell remoting:
-    1. **Set-Item WSMan:\localhost\Client\TrustedHosts "172.16.0.X"**
-    2. **$ip = "172.16.0.X"**
-    3. **Enter-PSSession -ComputerName \$ip -Credential \$ip\\Administrator**
-3. In the **Windows PowerShell** credential request dialog box, in the **Password** box, type **Pa55w.rd**, and then click **OK**.
-4. To enable file sharing through the firewall, run **netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=yes**.
-5. Close the Windows PowerShell remoting session by running **Exit-PSSession**.
-6. Map a network drive to the **C** drive on Nano Server. (net use z: \\\\172.16.0.X\c$)
-7. Switch to the **Z** drive and then copy **C:odjblob** to the root of the **C** drive on Nano Server.
-8. Reestablish a Windows PowerShell remoting session to Nano Server.
-9. Run **djoin /requestodj /loadfile c:\odjblob /windowspath c:\windows /localos** to complete the process of adding the computer to the domain.
-10. Run **shutdown /r /t 5** to restart Nano Server.
-11. On **NANO-SVR1**, in the domain **Adatum**, sign in as **Administrator/Pa55w.rd**.
-12. In the **Nano Server Recovery Console**, observe that the computer is in the adatum.com domain.
-
-**Task 3: Use Windows PowerShell to configure the settings of Nano Server** 
-1. On **LON-DC1**, close **Windows PowerShell**. 
-2. Open an elevated **Windows PowerShell** prompt.
-3. Run **get-windowsfeature –comp Nano-svr1** to list the installed roles and features on Nano Server.
-4. To add the File Server role to Nano Server, run **install-windowsfeature Fs-fileserver –comp Nanosvr1**
-5. To verify the role is installed, run **get-windowsfeature –comp Nano-svr1**.  
-6. Enable a Windows PowerShell remoting session with Nano Server. Remember to change **X** to the last octet of the IP address of your Nano server:
-   1. Run **$ip = "172.16.0.X"**.
-   2. Run **Enter-PSSession -ComputerName $ip -Credential $ip\Administrator**.
-7. When you receive a prompt, type **Pa55w.rd** as the password.
-8. To view the IP configuration of Nano Server, run **get-netipaddress**.
-9. To view the startup environment of Nano Server, run **bcdedit /enum**.
-10. To view the shared folders, run **net share**. Only default shares exist.
-11. At the command prompt, type the following cmdlet, and then press Enter:  **Exit-PSSession**
-
-**Results:** After completing this exercise, you will have successfully configured the domain and network settings of Nano Server and installed an additional role.
+**Task 1: Use Windows PowerShell and Sconfig.cmd to configure the settings of  Server Core**
+2. Open **Windows PowerShell** on **LON-SVR6**.
+3. Use the **$env:computername** and **Get-NetIPAddress** cmdlets to display the **LON-SVR6** host name and IPv4 address information.
+4. Note that the name is random and that the address is automatically derived from a DHCP Server.
+5. Run the **Sconfig.cmd** tool on **LON-SVR6**. Use the tool to set the following:
+   1. IP Address settings: 
+      1. Address: **172.16.0.26**
+      2. Subnet Mask: **255.255.0.0**
+      3. Default Gateway: **172.16.0.1**
+      4. Preferred DNS Server: **172.16.0.10**
+   2. Join the **Adatum.com** domain and use **Adatum\administrator** credentials.
+   3. Rename the computer **LON-SVR6** and use **Adatum\Administrator** credentials.
+   4. Restart the computer.
+   5. After **LON-SVR6** starts, sign in as **Administrator** with the password **Pa55w.rd**.
+6. Start **Windows PowerShell**, and then use the **$env:computername** and **Get-NetIPAddress** cmdlets to display the **LON-SVR6** host name and IPv4 address information. 
+7. Note that the name is **LON-SVR6** and that the address is **172.16.0.26**.
+8. Type the following, and then press Enter: 
+```
+Install-WindowsFeature DNS
+```
+>**Results:** After completing this exercise, you will have successfully configured the domain and network settings of Server Core and install an additional role. 
 
 ## Exercise 3: Performing remote management
 
 **Scenario**
-You must add some additional server roles to the Nano server before it can be used in production. You will add and enable the file and web server roles by using remote management.
-
-The main tasks for this exercise are as follows: 
-
-1. Enable remote management with Server Manager.
-2. Test the file server and web server on Nano Server.
-3. Prepare for the next module.
+Now that you added the DNS Server role to Server Core on **LON-SVR6**, you want to explore configuring the DNS settings and configuration by using GUI tools on other Windows Server with Desktop Experience systems. The main tasks for this exercise are as follows: 
+1. Enable remote management with Server Manager. 
+2. Add LON-SVR6 to DNS Manager on LON-DC1 and then add the Adatum.com zone to LON-SVR6 as a secondary zone.
+3. Examine the new zone information on LON-SVR6.
 
 **Task 1: Enable remote management with Server Manager**
-1. On **LON-DC1**, in **Server Manager**, add Nano-SVR1 to the **Computer** list.
-2. In Server Manager, expand **File and Storage Services**, click **Shares**, and then in the **TASKS** list, click **New Share**.
-3. Create a new shared folder:
-    1. Type: **SMB Share - Quick**
-    2. Server: **nano-svr1**
-    3. Share name: **Data**
-    
-**Task 2: Test the file server and web server on Nano Server**
-1. If necessary, on **LON-DC1**, map drive **Z** to **\\\\Nano-svr1\c$**.
-2. Start **Notepad**, and then create a file with the following line.
-```
-<H1> Nano Server Website </H1>
-```
-3. Save the file called **Default.htm** to **z:\Inetpub\wwwroot**.  
-4. Open **Windows Internet Explorer**, and then navigate to **http://nano-svr1**. Does your web page display?
-5. Map drive **Y** to **\\\\Nano-svr1\data**. 
-6. Open **WordPad**, create a file, and then save the file to the root of drive **Y**.
-7. Use File Explorer to verify that your file is saved on **Nano-Svr1**.
+1. On **LON-DC1**, in Server Manager, add **LON-SVR6** to the **Computer** list.
+2. Open **DNS Manager**, and then add **LON-SVR6** as a name server in the Adatum.com zone.
+3. In DNS Manager, allow zone transfers to all name servers, and then set **Notify** to **172.16.0.26**.
 
-**Task 3: Prepare for the next module**
+**Task 2: Add LON-SVR6 to DNS Manager on LON-DC1 and then add the Adatum.com zone to LON-SVR6 as a secondary zone**
+1. In DNS Manager, on **LON-DC1**, add **LON-SVR6** as an additional DNS server by using the **Connect to DNS Server** window.
+2. In DNS Manager, add the **Adatum.com** zone as a secondary zone on **LON-SVR6**, using LON-DC1 as the master DNS server.
+3. Refresh **DNS Manager**, and then verify that **LON-SVR6** has the **Adatum.com** zone information and resource records from **LON-DC1**.
+
+**Task 3: Examine the new zone information on LON-SVR6**
+1. Return to **LON-SVR6**.
+2. Use the **dnscmd** command to enumerate the zones and note the type of zone for Adatum.com: 
+```
+Dnscmd /enumzones
+```
+3. Use **dnscmd** to enumerate the zones on LON-DC1 and note the type of zone for Adatum.com: 
+```
+Dnscmd LON-DC1 /enumzones 
+```
+4. Display the DNS client server address by using Windows PowerShell: 
+```
+Get-DnsClientServerAddress
+```
+5. Set the LON-SVR6 DNS server address, replacing the X with the actual interface index number from step 4:
+```
+Set-DnsClientServerAddress -InterfaceIndex X -ServerAddresses (“172.16.0.26”, “172.16.0.10”)
+```
+6. Verify the results. Use the Windows PowerShell command from step 4.
+
+>**Results:** After completing this exercise, you will have configured the DNS Server settings on LON-SVR6remotely. 
+
+**Task 4: Prepare for the next module**
 
 After you finish the lab, revert the virtual machines to their initial state by completing the following steps: 
 1. On the host computer, switch to the **Hyper-V Manager** console.
-2. In the **Virtual Machines** list, right-click **20740B-LON-DC1**, and then click **Revert**.
+2. In the **Virtual Machines** list, right-click **20740C-LON-DC1**, and then click **Revert**.
 3. In the **Revert Virtual Machine** dialog box, click **Revert**.
-4. Repeat steps 2 and 3 for **20740B-NANO-SVR1**. 
- 
->**Results:** After completing this exercise, you will have installed and enabled the file and web server roles using remote management. 
+4. Repeat steps 2 and 3 for **20740C-LON-SVR6**. 
