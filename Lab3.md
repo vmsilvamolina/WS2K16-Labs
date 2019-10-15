@@ -9,19 +9,19 @@ After completing this lab, you will be able to:
 
 **Lab Setup**
 - Estimated Time: 60 minutes
-- Virtual machines: 20470C-LON-DC1 and 20470C-LON-SVR1
+- Virtual machines: 20740C-LON-DC1 and 20740C-LON-SVR1
 - User name: Adatum\Administrator
 - Password: Pa55w.rd
 
 For this lab, you will use the available virtual machine environment. Before you begin the lab, you must complete the following steps:
 1. On the host computer, start Hyper-V Manager.
-2. In Hyper-V Manager, click 20470C-LON-DC1, and then in the Actions pane, click Start.
+2. In Hyper-V Manager, click 20740C-LON-DC1, and then in the Actions pane, click Start.
 3. In the Actions pane, click Connect. Wait until the virtual machine starts.
 4. Sign in by using the following credentials:
    1. User name: Administrator
    2. Password: Pa55w.rd
    3. Domain: Adatum
-5. Repeat steps 2 through 4 for 20470C-LON-SVR1.
+5. Repeat steps 2 through 4 for 20740C-LON-SVR1.
 
 
 ## Exercise 1: Planning storage requirements
