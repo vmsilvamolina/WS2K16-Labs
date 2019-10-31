@@ -141,12 +141,15 @@ After AD DS sites and replication are established, A. Datum experiences replicat
 `Get-ADReplicationUpToDatenessVectorTable –Target “adatum.com”`
 4. Observe the results, and then note the date and time of the most recent replication event. 
 5. Go to TOR-DC1, open Windows PowerShell, and then run the following Windows PowerShell commands:  
-`CD \Labfiles\Mod04.\Mod04Ex4.ps1`
+`CD \Labfiles\Mod04`
+`.\Mod04Ex4.ps1`
 
 **Task 2: Monitor AD DS site replication** 
 1. On TOR-DC1, in Active Directory Sites and Services, replicate LON-DC1 with TOR-DC1 from the Toronto site. 
 2. On TOR-DC1, in Windows PowerShell, run the following cmdlets, and then observe the results: 
-`Get-ADReplicationUpToDatenessVectorTable –Target “adatum.com” Get-AdReplicationSubnet –filter * Get-AdReplicationSiteLink–filter *`
+`Get-ADReplicationUpToDatenessVectorTable –Target “adatum.com”`
+`Get-AdReplicationSubnet –filter *`
+`Get-AdReplicationSiteLink–filter *`
 
 **Task 3: Troubleshoot AD DS replication** 
 1. On TOR-DC1, in Windows PowerShell, determine the IP address settings for the computer, and then run the following cmdlet: 
